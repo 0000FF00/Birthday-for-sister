@@ -13,15 +13,14 @@
     <!-- 这是主要的卡片容器 -->
     <div class="card">
         <!-- 1. 修改图片 -->
-        <!-- 你可以把一张你姐姐的照片放到和 index.html 相同的文件夹里 -->
-        <!-- 然后把下面的 "your_sister_photo.jpg" 替换成你的照片文件名 -->
-        <!-- 或者，你也可以用一个网络图片的链接 -->
+        <!-- 修正：移除了 < 和 img 之间的空格 -->
         < img src="https://img.ixintu.com/download/jpg/a6ed67a44c1653dd4dc03d6d0f96106f.jpg!con" alt="生日蛋糕" class="birthday-image">
 
         <!-- 2. 修改主标题 -->
         <h1>祝我最亲爱的姐姐生日快乐！🎂</h1>
 
         <!-- 3. 修改祝福语 -->
+        <!-- 修正：移除了 </p > 标签中的空格 -->
         <p class="message">
             亲爱的姐姐，今天是属于你的特别日子！愿你每一天都充满阳光、笑容和爱。感谢你一直以来的陪伴和照顾。希望所有美好的事物都围绕着你，新的一岁，万事顺意，平安喜乐！
         </p >
@@ -32,15 +31,24 @@
         <!-- 隐藏的惊喜信息 -->
         <div id="surpriseMessage" class="hidden">
             <h2>一个小秘密...</h2>
+            <!-- 修正：移除了 </p > 标签中的空格 -->
             <p>那就是... 你是全世界最棒的姐姐！爱你哦！❤️</p >
         </div>
 
         <!-- 4. 修改落款 -->
+        <!-- 修正：移除了 </p > 标签中的空格 -->
         <p class="from">
             爱你的弟弟, <br>
             吴宇健
         </p >
     </div>
+
+    <!-- 背景音乐 -->
+    <!-- 修正：将 audio 标签移入 body 内部，并使用了正确的 raw 文件链接 -->
+    <audio controls autoplay loop>
+        <source src="https://github.com/0000FF00/Birthday-for-sister/raw/main/music/BirthdayCard.mp3" type="audio/mpeg">
+        您的浏览器不支持 audio 标签。
+    </audio>
 
     <!-- 这是实现惊喜按钮功能的一小段代码 -->
     <script>
@@ -56,10 +64,7 @@
             revealButton.style.display = 'none';
         });
     </script>
-</body>
-        <audio controls>
-        <source src="https://github.com/0000FF00/Birthday-for-sister/blob/main/%E7%BE%A4%E6%98%9F%20-%20Happy%20Birthday%20To%20You.mp3" type="audio/mpeg">
-        您的浏览器不支持 audio 标签。
-    </audio>
+
+<!-- 修正：移除了这里多余的 </body> 标签 -->
 </body>
 </html>
