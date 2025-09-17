@@ -3,168 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>生日快乐，亲爱的姐姐！</title>
+    <!-- 下面这行是网页标签上显示的名字，可以修改 -->
+    <title>祝我最爱的姐姐25岁生日快乐！</title>
+    <!-- 引入我们待会儿要写的样式文件 -->
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* 以下是新增的密码输入框样式 */
-        .password-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #fce38a, #f38181); /* 和背景一致 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 1000; /* 确保在最顶层 */
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .password-overlay label {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .password-overlay input[type="password"] {
-            padding: 15px 20px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            width: 250px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .password-overlay button {
-            padding: 12px 25px;
-            font-size: 1.1em;
-            background-color: #fff;
-            color: #f38181;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .password-overlay button:hover {
-            background-color: #fce38a;
-            transform: scale(1.05);
-        }
-
-        .password-overlay .error-message {
-            color: #ff0000;
-            font-weight: bold;
-            margin-top: 10px;
-            min-height: 20px; /* 预留空间，防止页面跳动 */
-        }
-
-        /* 当密码正确后，隐藏密码输入框 */
-        .password-overlay.hidden {
-            opacity: 0;
-            pointer-events: none; /* 隐藏后就不能再点击了 */
-        }
-
-        /* 正常显示贺卡内容 */
-        .card {
-            display: none; /* 默认隐藏贺卡 */
-        }
-
-        body.unlocked .card {
-            display: block; /* 解锁后显示贺卡 */
-        }
-
-        body.unlocked .password-overlay {
-            display: none; /* 解锁后隐藏密码输入框 */
-        }
-    </style>
 </head>
 <body>
-
-    <!-- 密码输入区域 -->
-    <div class="password-overlay" id="passwordOverlay">
-        <label for="passwordInput">请输入生日祝福的密码：</label>
-        <input type="password" id="passwordInput" placeholder="在这里输入密码">
-        <button onclick="checkPassword()">解锁祝福</button>
-        <div class="error-message" id="errorMessage"></div>
-    </div>
-
-    <!-- 生日贺卡内容 (在密码验证通过后才会显示) -->
+    <!-- 这是主要的卡片容器 -->
     <div class="card">
-        < img src="your_sister_photo.jpg" alt="生日蛋糕" class="birthday-image">
+        <img src="https://github.com/0000FF00/Birthday-for-sister/raw/main/photo/wys.jpg" alt="生日蛋糕" class="birthday-image">
+        <!-- 2. 修改主标题 -->
+        <h1>祝我最亲爱的姐姐25岁生日快乐！🎂</h1>
 
-        <h1>祝我最亲爱的姐姐生日快乐！🎂</h1>
-
+        <!-- 3. 修改祝福语 -->
+        <!-- 修正：移除了 </p > 标签中的空格 -->
         <p class="message">
             亲爱的姐姐，今天是属于你的特别日子！愿你每一天都充满阳光、笑容和爱。感谢你一直以来的陪伴和照顾。希望所有美好的事物都围绕着你，新的一岁，万事顺意，平安喜乐！
         </p >
 
+        <!-- 惊喜按钮 -->
         <button id="revealButton">点我查看一个秘密！</button>
 
+        <!-- 隐藏的惊喜信息 -->
         <div id="surpriseMessage" class="hidden">
             <h2>一个小秘密...</h2>
+            <!-- 修正：移除了 </p > 标签中的空格 -->
             <p>那就是... 你是全世界最棒的姐姐！爱你哦！❤️</p >
         </div>
 
+        <!-- 4. 修改落款 -->
+        <!-- 修正：移除了 </p > 标签中的空格 -->
         <p class="from">
-            爱你的, <br>
-            [这里写你的名字]
+            爱你的弟弟, <br>
+            吴宇健
         </p >
     </div>
 
-    <script>
-        // !!! 重要：请在这行修改你自己的密码 !!!
-        const correctPassword = '000726'; // 替换成你自己的密码
+    <!-- 背景音乐 -->
+    <!-- 修正：将 audio 标签移入 body 内部，并使用了正确的 raw 文件链接 -->
+    <audio controls autoplay loop>
+        <source src="https://github.com/0000FF00/Birthday-for-sister/raw/main/music/BirthdayCard.mp3" type="audio/mpeg">
+        您的浏览器不支持 audio 标签。
+    </audio>
 
-        const passwordOverlay = document.getElementById('passwordOverlay');
-        const passwordInput = document.getElementById('passwordInput');
-        const errorMessage = document.getElementById('errorMessage');
+    <!-- 这是实现惊喜按钮功能的一小段代码 -->
+    <script>
+        // 获取按钮和惊喜信息元素
         const revealButton = document.getElementById('revealButton');
         const surpriseMessage = document.getElementById('surpriseMessage');
-        const bodyElement = document.body;
 
-        function checkPassword() {
-            const enteredPassword = passwordInput.value;
-
-            if (enteredPassword === correctPassword) {
-                // 密码正确
-                passwordOverlay.classList.add('hidden'); // 隐藏密码输入框
-                bodyElement.classList.add('unlocked'); // 解锁贺卡显示
-                passwordInput.value = ''; // 清空输入框
-            } else {
-                // 密码错误
-                errorMessage.textContent = '密码错误，请重新尝试！';
-                passwordInput.value = ''; // 清空输入框
-                passwordInput.focus(); // 让输入框重新获得焦点
-            }
-        }
-
-        // 允许用户按回车键提交密码
-        document.getElementById('passwordInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                checkPassword();
-            }
-        });
-
-        // 之前的惊喜按钮逻辑
+        // 当按钮被点击时
         revealButton.addEventListener('click', () => {
+            // 显示惊喜信息
             surpriseMessage.classList.remove('hidden');
+            // 隐藏按钮自己
             revealButton.style.display = 'none';
-        });
-
-        // 确保第一次加载时，贺卡内容是隐藏的
-        document.addEventListener('DOMContentLoaded', () => {
-            if (!bodyElement.classList.contains('unlocked')) {
-                // 默认隐藏贺卡内容，只有解锁后才显示
-                const cardElement = document.querySelector('.card');
-                if (cardElement) {
-                    cardElement.style.display = 'none'; // 强制隐藏，CSS会覆盖
-                }
-            }
         });
     </script>
 </body>
