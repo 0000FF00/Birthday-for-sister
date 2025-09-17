@@ -3,60 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 下面这行是网页标签上显示的名字，可以修改 -->
-    <title>祝我最爱的姐姐25岁生日快乐！</title>
-    <!-- 引入我们待会儿要写的样式文件 -->
+    <title>一份给姐姐的生日惊喜！</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 这是主要的卡片容器 -->
-    <div class="card">
-        <img src="https://github.com/0000FF00/Birthday-for-sister/raw/main/photo/wys.jpg" alt="生日蛋糕" class="birthday-image">
-        <!-- 2. 修改主标题 -->
-        <h1>祝我最亲爱的姐姐25岁生日快乐！🎂</h1>
 
-        <!-- 3. 修改祝福语 -->
-        <!-- 修正：移除了 </p > 标签中的空格 -->
-        <p class="message">
-            亲爱的姐姐，今天是属于你的特别日子！愿你每一天都充满阳光、笑容和爱。感谢你一直以来的陪伴和照顾。希望所有美好的事物都围绕着你，新的一岁，万事顺意，平安喜乐！
-        </p >
-
-        <!-- 惊喜按钮 -->
-        <button id="revealButton">点我查看一个秘密！</button>
-
-        <!-- 隐藏的惊喜信息 -->
-        <div id="surpriseMessage" class="hidden">
-            <h2>一个小秘密...</h2>
-            <!-- 修正：移除了 </p > 标签中的空格 -->
-            <p>那就是... 你是全世界最棒的姐姐！爱你哦！❤️</p >
-        </div>
-
-        <!-- 4. 修改落款 -->
-        <!-- 修正：移除了 </p > 标签中的空格 -->
-        <p class="from">
-            爱你的弟弟, <br>
-            吴宇健
-        </p >
+    <!-- 1. 新增：密码输入界面 -->
+    <div id="password-gate">
+        <h2>请输入密码开启惊喜~</h2>
+        <p class="hint">（提示：姐姐的生日，4位数字）</p >
+        <input type="password" id="password-input" placeholder="在这里输入密码">
+        <button id="submit-button">确认</button>
+        <p id="error-message"></p >
     </div>
 
-    <!-- 背景音乐 -->
-    <!-- 修正：将 audio 标签移入 body 内部，并使用了正确的 raw 文件链接 -->
-    <audio controls autoplay loop>
-        <source src="https://github.com/0000FF00/Birthday-for-sister/raw/main/music/BirthdayCard.mp3" type="audio/mpeg">
-        您的浏览器不支持 audio 标签。
-    </audio>
+    <!-- 2. 主贺卡内容 (默认隐藏) -->
+    <div id="card-content" class="hidden">
+        <div class="card">
+            < img src="https://github.com/0000FF00/Birthday-for-sister/raw/main/photo/wys.jpg" alt="生日照片" class="birthday-image">
+            <h1>祝我最亲爱的姐姐25岁生日快乐！🎂</h1>
+            <p class="message">
+                亲爱的姐姐，今天是属于你的特别日子！愿你每一天都充满阳光、笑容和爱。感谢你一直以来的陪伴和照顾。希望所有美好的事物都围绕着你，新的一岁，万事顺意，平安喜乐！
+            </p >
+            <button id="revealButton">点我查看一个秘密！</button>
+            <div id="surpriseMessage" class="hidden">
+                <h2>一个小秘密...</h2>
+                <p>那就是... 你是全世界最棒的姐姐！爱你哦！❤️</p >
+            </div>
+            <p class="from">
+                爱你的弟弟, <br>
+                吴宇健
+            </p >
+        </div>
 
-    <!-- 这是实现惊喜按钮功能的一小段代码 -->
+        <!-- 将 audio 标签也放入这个容器中 -->
+        <audio id="birthday-music" loop>
+            <source src="https://github.com/0000FF00/Birthday-for-sister/raw/main/music/BirthdayCard.mp3" type="audio/mpeg">
+            Your browser does not support the audio tag.
+        </audio>
+    </div>
+    
+    <!-- 3. 修改后的 JavaScript -->
     <script>
-        // 获取按钮和惊喜信息元素
+        // --- 密码验证逻辑 ---
+
+        // 在这里设置你的密码！可以是数字或文字。
+        const CORRECT_PASSWORD = "1018"; // 示例密码，请修改为你想要的
+
+        // 获取页面元素
+        const passwordGate = document.getElementById('password-gate');
+        const passwordInput = document.getElementById('password-input');
+        const submitButton = document.getElementById('submit-button');
+        const errorMessage = document.getElementById('error-message');
+        const cardContent = document.getElementById('card-content');
+        const birthdayMusic = document.getElementById('birthday-music');
+
+        // 当点击“确认”按钮时
+        submitButton.addEventListener('click', () => {
+            // 检查输入的密码是否正确
+            if (passwordInput.value === CORRECT_PASSWORD) {
+                // 密码正确
+                // 1. 隐藏密码输入界面
+                passwordGate.style.display = 'none';
+                // 2. 显示贺卡内容
+                cardContent.classList.remove('hidden');
+                // 3. 播放背景音乐
+                birthdayMusic.play();
+                
+            } else {
+                // 密码错误
+                // 1. 显示错误提示
+                errorMessage.textContent = '密码不对哦，再想想？';
+                // 2. 清空输入框
+                passwordInput.value = '';
+            }
+        });
+
+        // --- 原有的惊喜按钮逻辑 ---
         const revealButton = document.getElementById('revealButton');
         const surpriseMessage = document.getElementById('surpriseMessage');
 
-        // 当按钮被点击时
         revealButton.addEventListener('click', () => {
-            // 显示惊喜信息
             surpriseMessage.classList.remove('hidden');
-            // 隐藏按钮自己
             revealButton.style.display = 'none';
         });
     </script>
