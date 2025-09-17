@@ -3,18 +3,24 @@
 
 /* 整体页面样式 */
 body {
-    font-family: 'Noto Sans SC', sans-serif; /* 使用更美观的中文字体 */
-    background: linear-gradient(135deg, #fce38a, #f38181); /* 温馨的渐变背景 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    font-family: 'Noto Sans SC', sans-serif;
+    background: linear-gradient(135deg, #fce38a, #f38181);
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
+    transition: background-color 0.5s ease-in-out; /* 平滑过渡背景 */
+    display: flex; /* 使它能居中 */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-/* 卡片样式 */
+/* 当页面解锁后，背景可以有一些变化，或者就保持不变 */
+body.unlocked {
+    background: linear-gradient(135deg, #e0c3fc, #8ec5fc); /* 解锁后的一个示例背景 */
+}
+
+/* 卡片容器样式 (将被隐藏，等密码正确后才显示) */
 .card {
     background-color: #ffffff;
     padding: 30px 40px;
@@ -23,7 +29,7 @@ body {
     text-align: center;
     max-width: 500px;
     width: 100%;
-    transform: scale(0.95);
+    transform: scale(0.95); /* initial scale before animation */
     animation: pop-in 0.6s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -41,7 +47,7 @@ body {
 /* 图片样式 */
 .birthday-image {
     max-width: 200px;
-    border-radius: 50%; /* 圆形图片 */
+    border-radius: 50%;
     border: 5px solid #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     margin-bottom: 20px;
@@ -68,7 +74,7 @@ h1 {
     font-weight: bold;
 }
 
-/* 按钮样式 */
+/* 惊喜按钮样式 */
 #revealButton {
     background-color: #ff7e5f;
     color: white;
@@ -87,7 +93,7 @@ h1 {
     transform: scale(1.05);
 }
 
-/* 惊喜信息样式 */
+/* 隐藏的惊喜信息样式 */
 #surpriseMessage {
     background-color: #fff9c4;
     border-left: 5px solid #fbc02d;
@@ -101,3 +107,13 @@ h1 {
 .hidden {
     display: none;
 }
+
+/* !!! 这个 CSS 规则很重要，它让贺卡在密码解锁前是隐藏的： !!! */
+body:not(.unlocked) .card {
+    display: none;
+}
+
+/* body.unlocked .password-overlay {
+    display: none;
+} */
+/* 上面这行 CSS 已经被移到 style.css 的 js 部分，但保留在这里作为说明 */
